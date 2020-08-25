@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "pyo3"
+version = "0.1.0"
+description = ""
+authors = ["tkat0 <tkato.dev@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["maturin"]
+build-backend = "maturin"
+
+[tool.maturin]
+bindings = "cffi"
+manylinux = "off"

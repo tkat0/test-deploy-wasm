@@ -1,0 +1,50 @@
+[tasks.setup]
+clear = true
+workspace = false
+script = ['''
+rustup target add wasm32-wasi
+pip install -r requirements.txt
+curl https://wasmtime.dev/install.sh -sSf | bash
+''']
+
+[tasks.build-pyo3]
+clear = true
+workspace = false
+script = ['''
+cd pyo3
+cargo build --release
+maturin build
+cd -
+
+pip install -U target/wheels/benchmark_pyo3-0.1.0-cp38-cp38-manylinux1_x86_64.whl
+''']
+
+[tasks.build-wasm]
+clear = true
+workspace = false
+script = ['''
+cd wasm
+cargo build --release
+cp ../target/wasm32-wasi/release/benchmark_wasm.wasm ./benchmark_wasm/
+poetry build
+cd -
+
+pip install -U wasm/dist/benchmark_wasm-0.1.0-py3-none-any.whl
+''']
+
+[tasks.bench]
+clear = true
+workspace = false
+script = ['''
+python main.py
+find ./ -type f -name *.whl | xargs -r ls -lha | awk '{print $5,$9}'
+''']
+
+[tasks.all]
+clear = true
+workspace = false
+dependencies = [
+    "build-pyo3",
+    "build-wasm",
+    "bench",
+]
