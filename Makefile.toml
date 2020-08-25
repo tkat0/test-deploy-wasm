@@ -12,8 +12,7 @@ clear = true
 workspace = false
 script = ['''
 cd pyo3
-cargo build --release
-maturin build
+maturin build --release
 cd -
 
 pip install -U target/wheels/benchmark_pyo3-0.1.0-cp38-cp38-manylinux1_x86_64.whl
