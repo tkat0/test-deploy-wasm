@@ -31,6 +31,14 @@ cd -
 pip install -U wasm/dist/benchmark_wasm-0.1.0-py3-none-any.whl
 ''']
 
+[tasks.build]
+clear = true
+workspace = false
+dependencies = [
+    "build-pyo3",
+    "build-wasm",
+]
+
 [tasks.bench]
 clear = true
 workspace = false
@@ -43,7 +51,6 @@ find ./ -type f -name *.whl | xargs -r ls -lha | awk '{print $5,$9}'
 clear = true
 workspace = false
 dependencies = [
-    "build-pyo3",
-    "build-wasm",
+    "build",
     "bench",
 ]

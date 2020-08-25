@@ -6,7 +6,7 @@ authors = ["tkat0 <tkato.dev@gmail.com>"]
 include = ["benchmark_wasm/*.wasm"]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 wasmtime = "^0.19.0"
 
 [tool.poetry.dev-dependencies]
